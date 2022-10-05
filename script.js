@@ -15,16 +15,16 @@ function divide(x, y){
 };
 
 function operate(operator, x, y){
-    if(operator == "add"){
+    if (operator == "add"){
         return add(x, y);
     }
-    else if(operator == "subtract"){
+    else if (operator == "subtract"){
         return subtract( x, y);
     } 
-    else if(operator == "multiply"){
+    else if (operator == "multiply"){
         return multiply(x, y);
     }
-    else{
+    else {
         return divide(x, y);
     };
 };
