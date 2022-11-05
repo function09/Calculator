@@ -1,7 +1,7 @@
 const display = document.querySelector('#display');
 const operandButtons = document.querySelectorAll('.number-btn');
 const operatorButtons = document.querySelectorAll('.operator-btn');
-const equalButton = document.querySelector('#equal')
+const equalButton = document.querySelector('#equal');
 const decimal = document.querySelector('#decimal');
 const clear = document.querySelector('#clear');
 let arrayX = [];
@@ -24,17 +24,18 @@ function divide(x, y){
     return x/y
 };
 
-function operate(operator, x, y){
-    if (operator == "add"){
+function operate(operation, x, y){
+   
+    if (operation == "add"){
         return add(x, y);
     }
-    else if (operator == "subtract"){
+    else if (operation == "subtract"){
         return subtract(x, y);
     } 
-    else if (operator == "multiply"){
+    else if (operation == "multiply"){
         return multiply(x, y);
     }
-    else if(operator === "divide") 
+    else if(operation === "divide") 
         return divide(x, y);   
 };
 
@@ -68,10 +69,7 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         
         operator = e.target.textContent
-
-        if(operator !== null){
-            display.textContent = Number(arrayX.join(''));
-        }
+        console.log(operator)
     });
 });
 
@@ -79,8 +77,7 @@ clear.addEventListener('click', () => {
     arrayX = [];
     arrayY = [];
     operator = null;
-    x = ''
-    y = ''
+    x = '';
+    y = '';
     display.textContent = '0';
 });
- 
