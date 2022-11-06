@@ -7,6 +7,7 @@ const clear = document.querySelector('#clear');
 let arrayX = [];
 let arrayY = [];
 let operator = null;
+let solution = null;
 
 function add(x, y){
     return x+y
@@ -21,21 +22,26 @@ function multiply(x, y){
 };
 
 function divide(x, y){
-    return x/y
+    if(y === 0){
+        return 'Error divide by 0'
+    }
+    else{
+        return x/y
+    }
 };
 
-function operate(operation, x, y){
-   
-    if (operation == "add"){
+function operate(operator, x, y){
+
+    if (operator == "+"){
         return add(x, y);
     }
-    else if (operation == "subtract"){
+    else if (operator == "-"){
         return subtract(x, y);
     } 
-    else if (operation == "multiply"){
+    else if (operator == "×"){
         return multiply(x, y);
     }
-    else if(operation === "divide") 
+    else if(operator === "÷") 
         return divide(x, y);   
 };
 
@@ -54,22 +60,18 @@ operandButtons.forEach(button => {
 
         if(operator === null){
             arrayX.push(e.target.textContent);
-            storeVariableX();
-            console.log(arrayX); 
+            storeVariableX(); 
         }
-        else if(operator !== null){
+        else if(operator !== null || x === solution){
             arrayY.push(e.target.textContent);
-            storeVariableY();
-            console.log(arrayY); 
+            storeVariableY();  
         }  
     });
 });
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        
         operator = e.target.textContent
-        console.log(operator)
     });
 });
 
@@ -80,4 +82,22 @@ clear.addEventListener('click', () => {
     x = '';
     y = '';
     display.textContent = '0';
+});
+
+equalButton.addEventListener('click', () =>{
+
+    if(arrayX !== [] && arrayY !== [] && operator !== null){
+        solution = operate(operator, x, y);
+        
+        display.textContent = solution;
+
+        arrayX = [];
+        arrayY = [];
+        x = solution;
+        y = '';
+        operator = null;
+    }
+    else if(display.textContent === '0'){
+        return 
+    }
 });
