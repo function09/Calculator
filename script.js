@@ -2,10 +2,12 @@ const display = document.querySelector('#display');
 const operandButtons = document.querySelectorAll('.number-btn');
 const operatorButtons = document.querySelectorAll('.operator-btn');
 const equalButton = document.querySelector('#equal');
-const decimal = document.querySelector('#decimal');
-const clear = document.querySelector('#clear');
+const decimalButton = document.querySelector('#decimal');
+const clearButton = document.querySelector('#clear');
 let arrayX = [];
 let arrayY = [];
+let x = ''
+let y = ''
 let operator = null;
 let solution = null;
 
@@ -47,25 +49,31 @@ function operate(operator, x, y){
 
 function storeVariableX(){
     x = Number(arrayX.join(''));
-    display.textContent = Number(arrayX.join('')); 
+    display.textContent = arrayX.join('');
 };
 
 function storeVariableY(){
     y = Number(arrayY.join(''));
-    display.textContent = Number(arrayY.join(''));
+    display.textContent = arrayY.join('');
 };
 
 operandButtons.forEach(button => {
     button.addEventListener('click', (e) => {
 
         if(operator === null){
+            if(e.target.value === '.' && arrayX.includes('.')){
+                return;
+            }
             arrayX.push(e.target.textContent);
-            storeVariableX(); 
+            storeVariableX();
         }
         else if(operator !== null || x === solution){
+            if(e.target.value === '.' && arrayY.includes('.')){
+                return;
+            }
             arrayY.push(e.target.textContent);
             storeVariableY();  
-        }  
+        }
     });
 });
 
@@ -75,7 +83,7 @@ operatorButtons.forEach(button => {
     });
 });
 
-clear.addEventListener('click', () => {
+clearButton.addEventListener('click', () => {
     arrayX = [];
     arrayY = [];
     operator = null;
@@ -85,19 +93,20 @@ clear.addEventListener('click', () => {
 });
 
 equalButton.addEventListener('click', () =>{
-
+    
     if(arrayX !== [] && arrayY !== [] && operator !== null){
-        solution = operate(operator, x, y);
-        
-        display.textContent = solution;
+        solution = operate(operator, x, y).toFixed(12);
 
+        display.textContent = solution;
         arrayX = [];
         arrayY = [];
         x = solution;
         y = '';
-        operator = null;
+        operator = null;   
     }
     else if(display.textContent === '0'){
         return 
     }
 });
+
+
