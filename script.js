@@ -92,21 +92,23 @@ clearButton.addEventListener('click', () => {
     display.textContent = '0';
 });
 
-equalButton.addEventListener('click', () =>{
+equalButton.addEventListener('click', () => {
     
     if(arrayX !== [] && arrayY !== [] && operator !== null){
-        solution = operate(operator, x, y).toFixed(12);
 
-        display.textContent = solution;
+        solution = parseFloat(operate(operator, x, y).toFixed(8));
+
+        display.textContent = solution
+
         arrayX = [];
         arrayY = [];
-        x = solution;
+        x = operate(operator, x, y);
         y = '';
-        operator = null;   
+        operator = null;  
     }
     else if(display.textContent === '0'){
         return 
     }
+    
 });
-
 
