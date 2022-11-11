@@ -1,3 +1,8 @@
+*{
+    background-color: #5c646d;
+    font-family: 'Roboto Mono', monospace;
+}
+
 #parentContainer{
     display: flex;
     align-items: center;
@@ -24,6 +29,7 @@
     color:aliceblue;
     background-color: #232526;
     overflow: hidden;
+    padding-bottom: 30px;
 }
 
 button{
