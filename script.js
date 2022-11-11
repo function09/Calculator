@@ -3,7 +3,8 @@ const operandButtons = document.querySelectorAll('.number-btn');
 const operatorButtons = document.querySelectorAll('.operator-btn');
 const equalButton = document.querySelector('#equal');
 const clearButton = document.querySelector('#clear');
-const deleteButton = document.querySelector('#delete')
+const deleteButton = document.querySelector('#delete');
+const percentButton = document.querySelector('.percent-btn');
 let arrayX = [];
 let arrayY = [];
 let x = '';
@@ -69,7 +70,7 @@ operandButtons.forEach(button => {
             arrayX.push(e.target.textContent);
             storeVariableX();
         }
-        else if(operator !== null || x === solution) {
+        else if(operator !== null || x === solution){
             if(e.target.value === '.' && arrayY.includes('.')){
                 return;
             }
@@ -89,7 +90,7 @@ equalButton.addEventListener('click', () => {
     
     if(arrayX !== [] && arrayY !== [] && operator !== null) {
 
-        solution = parseFloat(operate(operator, x, y).toFixed(8));
+        solution = parseFloat(operate(operator, x, y).toFixed(6));
 
         display.textContent = solution;
 
@@ -114,6 +115,7 @@ clearButton.addEventListener('click', () => {
 });
 
 deleteButton.addEventListener('click', () => {
+    
     if(display.textContent = arrayX.join('') && y == '') {
         arrayX.pop();
         x = Number(arrayX.join(''));
@@ -126,5 +128,19 @@ deleteButton.addEventListener('click', () => {
     }
     else if(display.textContent = solution) {
         display.textContent = '0'
+    }
+});
+
+percentButton.addEventListener('click', (e) => {
+    if(display.textContent = arrayX.join('') && y == ''){
+        display.textContent = (Number(arrayX.join(''))/100).toString();
+        x = Number(arrayX.join(''))/100;
+    }
+    else if(display.textContent = arrayY.join('') && x !== ''){
+        display.textContent = (Number(arrayY.join(''))/100).toString();
+        y = Number(arrayY.join(''))/100;
+    }
+    else if(display.textContent = '0'){
+        return;
     }
 });
